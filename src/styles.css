@@ -48,9 +48,9 @@
   --color-ring-offset-background: var(--background);
   --color-success: var(--success);
   --color-warning: var(--warning);
-  --color-amex-blue: var(--amex-blue);
-  --color-amex-navy: var(--amex-navy);
-  --color-amex-light: var(--amex-light);
+  --color-cc-blue: var(--cc-blue);
+  --color-cc-navy: var(--cc-navy);
+  --color-cc-light: var(--cc-light);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
@@ -68,12 +68,12 @@
 
 :root {
   --radius: 1rem;
-  /* AMEX-inspired palette */
-  --amex-blue: oklch(0.58 0.19 250);      /* #016FD0 */
-  --amex-navy: oklch(0.34 0.13 258);      /* #003A70 */
-  --amex-navy-deep: oklch(0.22 0.09 260);
-  --amex-light: oklch(0.96 0.03 240);     /* #D8F1FF */
-  --amex-sky: oklch(0.92 0.05 235);
+  /* Credit card palette */
+  --cc-blue: oklch(0.58 0.19 250);      /* #016FD0 */
+  --cc-navy: oklch(0.34 0.13 258);      /* #003A70 */
+  --cc-navy-deep: oklch(0.22 0.09 260);
+  --cc-light: oklch(0.96 0.03 240);     /* #D8F1FF */
+  --cc-sky: oklch(0.92 0.05 235);
 
   --background: oklch(0.985 0.005 240);
   --foreground: oklch(0.18 0.05 258);

@@ -9,7 +9,7 @@ export const Route = createFileRoute("/recovery")({
   head: () => ({
     meta: [
       { title: "Recovery Center · JourneyIQ" },
-      { name: "description", content: "Autonomous recovery plans with AMEX-scored alternatives." },
+      { name: "description", content: "Autonomous recovery plans with credit card-scored alternatives." },
       { property: "og:title", content: "Autonomous Recovery Center" },
       { property: "og:description", content: "Three intelligent recovery plans, ranked and explained." },
     ],
@@ -32,7 +32,7 @@ function Recovery() {
         <h1 className="mt-1 text-3xl font-semibold tracking-tight">Autonomous Recovery Center</h1>
         <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
           JourneyIQ generated three recovery paths in 2.3 seconds. Each is scored on arrival,
-          reliability, cost, comfort and AMEX benefit coverage.
+          reliability, cost, comfort and credit card benefit coverage.
         </p>
       </div>
       <div className="grid gap-4 lg:grid-cols-3">
@@ -79,7 +79,7 @@ function Recovery() {
                   <div className="mb-2 flex items-center gap-2 font-medium text-primary">
                     <Sparkles className="h-3.5 w-3.5" /> Why this plan
                   </div>
-                  Fastest arrival with zero out-of-pocket cost. Preserves your Hilton reservation and unlocks lounge access at DXB — fully covered by AMEX Platinum Travel Insurance.
+                  Fastest arrival with zero out-of-pocket cost. Preserves your Hilton reservation and unlocks lounge access at DXB — fully covered by Credit Card Travel Insurance.
                 </motion.div>
               )}
             </motion.button>
@@ -126,7 +126,7 @@ function Recovery() {
           </GlassCard>
         </div>
       </div>
-      <GlassCard className="border-primary/20 bg-gradient-to-br from-white to-amex-light/40">
+      <GlassCard className="border-primary/20 bg-gradient-to-br from-white to-cc-light/40">
         <div className="mb-4 flex items-start justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-primary">
@@ -142,7 +142,7 @@ function Recovery() {
             "Lowest downstream disruption risk",
             "Zero additional out-of-pocket payment",
             "Preserves Hilton Park Lane check-in",
-            "Fully covered by AMEX Travel Insurance",
+            "Fully covered by Credit Card Travel Insurance",
             "Lowest overall journey risk score",
           ].map((r, i) => (
             <motion.div

@@ -67,7 +67,7 @@ function DigitalTwin() {
       </div>
 
       <GlassCard className="p-0">
-        <div className="relative h-[440px] w-full overflow-hidden rounded-2xl bg-gradient-to-br from-white via-amex-light/40 to-white">
+        <div className="relative h-[440px] w-full overflow-hidden rounded-2xl bg-gradient-to-br from-white via-cc-light/40 to-white">
           {/* grid */}
           <div
             className="absolute inset-0 opacity-40"
@@ -170,7 +170,7 @@ function DigitalTwin() {
                 "Hotel Check-in Delayed · Hilton Park Lane",
                 "Airport Pickup Invalid · London",
                 "Business Meeting Risk · 09:00 tomorrow",
-                "Travel Insurance Eligible · AMEX Platinum",
+                "Travel Insurance Eligible · Credit Card",
               ].map((t, i) => (
                 <motion.div
                   key={t}
@@ -193,7 +193,7 @@ function DigitalTwin() {
           <GlassCard className="flex flex-col items-center py-8">
             <ConfidenceRing value={96} />
             <div className="mt-4 text-center text-sm text-muted-foreground">
-              Predicted from 12,438 similar disruptions across the AMEX network.
+              Predicted from 12,438 similar disruptions across the credit card network.
             </div>
           </GlassCard>
         </div>

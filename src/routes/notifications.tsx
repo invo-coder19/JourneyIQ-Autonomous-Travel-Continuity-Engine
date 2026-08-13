@@ -19,7 +19,7 @@ const events = [
   { t: "09:35", title: "Flight AI816 delayed", detail: "Weather · Delhi thunderstorm", icon: AlertTriangle, tone: "rose" },
   { t: "09:36", title: "Ripple effect detected", detail: "5 downstream dependencies impacted", icon: Sparkles, tone: "amber" },
   { t: "09:36", title: "Recovery initiated", detail: "Generated 3 alternative paths in 2.3s", icon: ShieldCheck, tone: "sky" },
-  { t: "09:37", title: "Benefits applied", detail: "AMEX Platinum insurance · ₹18,500 covered", icon: Check, tone: "emerald" },
+  { t: "09:37", title: "Benefits applied", detail: "Credit Card insurance · ₹18,500 covered", icon: Check, tone: "emerald" },
   { t: "09:38", title: "Hotel updated", detail: "Hilton Park Lane late check-in confirmed", icon: Building2, tone: "emerald" },
   { t: "09:39", title: "Taxi rescheduled", detail: "London chauffeur re-timed to 20:50", icon: Car, tone: "emerald" },
   { t: "09:39", title: "Journey recovered", detail: "Health score restored to 95%", icon: Plane, tone: "emerald" },

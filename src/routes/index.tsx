@@ -19,7 +19,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Dashboard · JourneyIQ" },
-      { name: "description", content: "Live journey status, disruption recovery, and AMEX benefits — at a glance." },
+      { name: "description", content: "Live journey status, disruption recovery, and Credit Card benefits — at a glance." },
       { property: "og:title", content: "JourneyIQ Dashboard" },
       { property: "og:description", content: "AI-powered self-healing travel intelligence." },
     ],
@@ -56,7 +56,7 @@ function Dashboard() {
         className="relative overflow-hidden rounded-3xl gradient-hero p-8 text-white shadow-elegant"
       >
         <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
-        <div className="absolute -bottom-16 -left-10 h-64 w-64 rounded-full bg-amex-blue/40 blur-3xl" />
+        <div className="absolute -bottom-16 -left-10 h-64 w-64 rounded-full bg-cc-blue/40 blur-3xl" />
 
         <div className="relative flex flex-wrap items-start justify-between gap-6">
           <div className="min-w-0 max-w-xl">

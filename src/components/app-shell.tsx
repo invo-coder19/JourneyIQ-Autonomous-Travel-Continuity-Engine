@@ -40,13 +40,13 @@ export function AppShell({ children }: { children: ReactNode }) {
       {/* Sidebar */}
       <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground lg:flex">
         <div className="flex items-center gap-2 px-6 pt-7 pb-8">
-          <div className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-amex-blue to-amex-light shadow-glow">
+          <div className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-cc-blue to-cc-light shadow-glow">
             <span className="text-sm font-black text-white">J</span>
           </div>
           <div className="leading-tight">
             <div className="text-[15px] font-semibold tracking-tight">JourneyIQ</div>
             <div className="text-[10px] uppercase tracking-[0.18em] text-sidebar-foreground/50">
-              AMEX · Autonomous
+              Credit Card · Autonomous
             </div>
           </div>
         </div>
@@ -68,7 +68,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                 {active && (
                   <motion.span
                     layoutId="nav-active"
-                    className="absolute inset-y-1.5 left-0 w-0.5 rounded-full bg-amex-blue"
+                    className="absolute inset-y-1.5 left-0 w-0.5 rounded-full bg-cc-blue"
                   />
                 )}
                 <item.icon className="h-4 w-4 shrink-0" />
@@ -79,7 +79,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           })}
         </nav>
 
-        <div className="m-3 rounded-2xl bg-gradient-to-br from-amex-blue/25 to-transparent p-4">
+        <div className="m-3 rounded-2xl bg-gradient-to-br from-cc-blue/25 to-transparent p-4">
           <div className="text-[10px] uppercase tracking-widest text-sidebar-foreground/60">
             Platinum · Card
           </div>
@@ -113,7 +113,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             </div>
             <button className="relative rounded-xl border border-border bg-white/60 p-2 hover:bg-white">
               <Bell className="h-4 w-4" />
-              <span className="absolute right-1.5 top-1.5 h-1.5 w-1.5 rounded-full bg-amex-blue" />
+              <span className="absolute right-1.5 top-1.5 h-1.5 w-1.5 rounded-full bg-cc-blue" />
             </button>
             <div className="h-8 w-8 rounded-full bg-gradient-hero ring-2 ring-white shadow-elegant" />
           </div>
@@ -158,7 +158,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                 Why did you pick DXB over IST?
               </div>
               <div className="rounded-2xl rounded-tl-sm bg-secondary p-3">
-                DXB scored <b>97/100</b>: earlier arrival by 42m, lounge access, and full AMEX
+                DXB scored <b>97/100</b>: earlier arrival by 42m, lounge access, and full credit card
                 coverage on the rebooking fee (₹18,500). IST scored 84.
               </div>
             </div>
@@ -182,7 +182,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         className="fixed bottom-6 right-6 z-50 grid h-14 w-14 place-items-center rounded-2xl bg-gradient-hero text-white shadow-glow transition hover:scale-105"
       >
         <MessageSquare className="h-5 w-5" />
-        <span className="absolute inset-0 -z-10 rounded-2xl bg-amex-blue/50 blur-xl" />
+        <span className="absolute inset-0 -z-10 rounded-2xl bg-cc-blue/50 blur-xl" />
       </button>
     </div>
   );

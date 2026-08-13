@@ -7,9 +7,9 @@ export const Route = createFileRoute("/benefits")({
   head: () => ({
     meta: [
       { title: "Benefits Optimizer · JourneyIQ" },
-      { name: "description", content: "Automatically apply AMEX Platinum benefits to your recovery — zero out-of-pocket." },
+      { name: "description", content: "Automatically apply Credit Card benefits to your recovery — zero out-of-pocket." },
       { property: "og:title", content: "Dynamic Benefit Optimizer" },
-      { property: "og:description", content: "AMEX benefits, applied automatically." },
+      { property: "og:description", content: "Credit Card benefits, applied automatically." },
     ],
   }),
   component: Benefits,
@@ -31,7 +31,7 @@ function Benefits() {
         <div className="text-[11px] uppercase tracking-[0.24em] text-primary">Innovation 04</div>
         <h1 className="mt-1 text-3xl font-semibold tracking-tight">Dynamic Benefit Optimizer</h1>
         <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-          Every AMEX Platinum benefit relevant to this disruption is applied automatically — no
+          Every Credit Card benefit relevant to this disruption is applied automatically — no
           claim forms, no waiting.
         </p>
       </div>
@@ -43,7 +43,7 @@ function Benefits() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.06 }}
             whileHover={{ y: -3 }}
-            className="group relative overflow-hidden rounded-2xl border border-border/60 bg-gradient-to-br from-white via-white to-amex-light/30 p-5 shadow-card backdrop-blur-xl"
+            className="group relative overflow-hidden rounded-2xl border border-border/60 bg-gradient-to-br from-white via-white to-cc-light/30 p-5 shadow-card backdrop-blur-xl"
           >
             <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-primary/10 blur-2xl transition-all group-hover:bg-primary/20" />
             <div className="flex items-start justify-between">
@@ -64,7 +64,7 @@ function Benefits() {
           </motion.div>
         ))}
       </div>
-      <SectionTitle title="Savings Summary" subtitle="Powered by AMEX Platinum" />
+      <SectionTitle title="Savings Summary" subtitle="Powered by Credit Card" />
       <motion.div
         initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -74,7 +74,7 @@ function Benefits() {
         <div className="grid gap-6 sm:grid-cols-3">
           {[
             { l: "Recovery Cost", v: "₹18,500", sub: "Total incurred" },
-            { l: "AMEX Coverage", v: "₹18,500", sub: "Auto-applied" },
+            { l: "Credit Card Coverage", v: "₹18,500", sub: "Auto-applied" },
             { l: "Customer Pays", v: "₹0", sub: "Out-of-pocket" },
           ].map((s, i) => (
             <motion.div

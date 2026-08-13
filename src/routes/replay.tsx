@@ -21,7 +21,7 @@ const frames = [
   { t: "09:35", title: "Flight Delay Detected", tone: "rose" },
   { t: "09:36", title: "Ripple Prediction Generated", tone: "amber" },
   { t: "09:37", title: "Recovery Score Computed", tone: "sky" },
-  { t: "09:38", title: "AMEX Benefits Applied", tone: "sky" },
+  { t: "09:38", title: "Credit Card Benefits Applied", tone: "sky" },
   { t: "09:39", title: "Journey Restored", tone: "emerald" },
 ];
 
@@ -64,7 +64,7 @@ function Replay() {
             ))}
           </div>
         </div>
-        <motion.div key={step} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="mt-8 rounded-2xl bg-gradient-to-br from-white via-amex-light/40 to-white p-8 text-center">
+        <motion.div key={step} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="mt-8 rounded-2xl bg-gradient-to-br from-white via-cc-light/40 to-white p-8 text-center">
           <div className={`inline-block rounded-full bg-gradient-to-r ${toneMap[frames[step].tone]} px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-white shadow-glow`}>{frames[step].t}</div>
           <div className="mt-4 text-3xl font-semibold tracking-tight">{frames[step].title}</div>
         </motion.div>

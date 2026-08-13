@@ -28,7 +28,7 @@ function Settings() {
             <div className="space-y-4">
               {[
                 { l: "Auto-accept recovery plans", d: "Apply best plan when confidence > 95%", on: true },
-                { l: "Auto-apply AMEX benefits", d: "Zero-touch benefit activation", on: true },
+                { l: "Auto-apply Credit Card benefits", d: "Zero-touch benefit activation", on: true },
                 { l: "Auto-rebook hotels", d: "Preserve loyalty properties", on: true },
                 { l: "Auto-reschedule transfers", d: "Local ground transport", on: false },
               ].map((r) => (

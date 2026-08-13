@@ -23,7 +23,7 @@ function MapPage() {
         <p className="mt-1 text-sm text-muted-foreground">Original and re-routed flight paths, updated in real time.</p>
       </div>
       <GlassCard className="p-0">
-        <div className="relative h-[520px] w-full overflow-hidden rounded-2xl bg-gradient-to-br from-amex-navy via-primary/80 to-amex-blue">
+        <div className="relative h-[520px] w-full overflow-hidden rounded-2xl bg-gradient-to-br from-cc-navy via-primary/80 to-cc-blue">
           <div
             className="absolute inset-0 opacity-30"
             style={{ backgroundImage: "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.4) 1px, transparent 0)", backgroundSize: "18px 18px" }}

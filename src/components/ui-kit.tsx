@@ -56,7 +56,7 @@ export function StatusDot({
 }) {
   const map = {
     healthy: "bg-emerald-500",
-    upcoming: "bg-amex-blue",
+    upcoming: "bg-cc-blue",
     disrupted: "bg-rose-500",
     affected: "bg-amber-500",
   } as const;

@@ -44,8 +44,8 @@ function Insights() {
         {[
           { t: "Weather-related delays out of PNQ increased 23% this monsoon.", d: "Consider shifting outbound legs to morning slots — model predicts 41% lower disruption probability." },
           { t: "Your Hilton stays consistently score 4.8/5 for late-check-in reliability.", d: "Preserving Hilton bookings during recovery has a 97% success rate." },
-          { t: "Dubai layovers unlock the highest AMEX benefit density.", d: "Lounge, transfer, and hotel coverage all activate on 92% of DXB routings." },
-          { t: "Your recovery success rate is 3.2× the AMEX network median.", d: "Attribution: early acceptance of AI recommendations within 8 minutes." },
+          { t: "Dubai layovers unlock the highest credit card benefit density.", d: "Lounge, transfer, and hotel coverage all activate on 92% of DXB routings." },
+          { t: "Your recovery success rate is 3.2× the credit card network median.", d: "Attribution: early acceptance of AI recommendations within 8 minutes." },
         ].map((x, i) => (
           <motion.div
             key={x.t}

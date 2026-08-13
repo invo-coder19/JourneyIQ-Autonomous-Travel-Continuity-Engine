@@ -82,7 +82,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "description", content: "AI-powered self-healing travel intelligence platform. Predict, recover, and optimize every journey with American Express." },
       { name: "author", content: "JourneyIQ" },
       { property: "og:title", content: "JourneyIQ — AI Travel Intelligence" },
-      { property: "og:description", content: "Predict disruptions, restore journeys, maximize AMEX benefits — automatically." },
+      { property: "og:description", content: "Predict disruptions, restore journeys, maximize Credit Card benefits — automatically." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@JourneyIQ" },
