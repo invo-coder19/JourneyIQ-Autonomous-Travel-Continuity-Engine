@@ -1,7 +1,21 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { motion } from "framer-motion";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 import { GlassCard, SectionTitle } from "@/components/ui-kit";
-import { Home, Plane, Building2, Car, Briefcase, AlertTriangle, CheckCircle2, ArrowRight } from "lucide-react";
+import {
+  Home,
+  Plane,
+  Building2,
+  Car,
+  Briefcase,
+  AlertTriangle,
+  CheckCircle2,
+  ArrowRight,
+  Sparkles,
+  Clock,
+  ShieldCheck,
+  X,
+} from "lucide-react";
 
 export const Route = createFileRoute("/digital-twin")({
   head: () => ({
@@ -17,7 +31,7 @@ export const Route = createFileRoute("/digital-twin")({
 
 type NodeState = "healthy" | "affected" | "broken" | "recovered" | "upcoming";
 
-const nodes: {
+interface JourneyNode {
   id: string;
   label: string;
   sub: string;
@@ -25,14 +39,104 @@ const nodes: {
   x: number;
   y: number;
   state: NodeState;
-}[] = [
-  { id: "home", label: "Home", sub: "Pune", icon: Home, x: 8, y: 50, state: "healthy" },
-  { id: "f1", label: "Flight AI816", sub: "PNQ→DEL", icon: Plane, x: 22, y: 30, state: "broken" },
-  { id: "ap", label: "Airport", sub: "DEL Layover", icon: Building2, x: 38, y: 55, state: "affected" },
-  { id: "f2", label: "Flight EK517", sub: "DEL→DXB (new)", icon: Plane, x: 54, y: 30, state: "recovered" },
-  { id: "h", label: "Hilton", sub: "London", icon: Building2, x: 70, y: 55, state: "upcoming" },
-  { id: "t", label: "Taxi", sub: "Rescheduled", icon: Car, x: 84, y: 32, state: "upcoming" },
-  { id: "m", label: "Meeting", sub: "The Shard", icon: Briefcase, x: 94, y: 60, state: "upcoming" },
+  time: string;
+  statusDetail: string;
+  autonomousAction: string;
+  downstreamAffected: string[];
+}
+
+const nodes: JourneyNode[] = [
+  {
+    id: "home",
+    label: "Home",
+    sub: "Pune",
+    icon: Home,
+    x: 8,
+    y: 50,
+    state: "healthy",
+    time: "07:20",
+    statusDetail: "Departed on schedule · Ground commute normal",
+    autonomousAction: "Monitoring baseline journey conditions",
+    downstreamAffected: [],
+  },
+  {
+    id: "f1",
+    label: "Flight AI816",
+    sub: "PNQ→DEL",
+    icon: Plane,
+    x: 22,
+    y: 30,
+    state: "broken",
+    time: "09:35 (+2h 45m)",
+    statusDetail: "Monsoon thunderstorm at DEL · Gate hold in effect",
+    autonomousAction: "Triggered multi-criteria recovery model (Option A selected)",
+    downstreamAffected: ["ap", "f2", "h", "t"],
+  },
+  {
+    id: "ap",
+    label: "Airport Layover",
+    sub: "DEL Layover",
+    icon: Building2,
+    x: 38,
+    y: 55,
+    state: "affected",
+    time: "12:20",
+    statusDetail: "Connection buffer breached by 70 minutes",
+    autonomousAction: "Re-allocated transit gate assistance and luggage transfer",
+    downstreamAffected: ["f2", "h"],
+  },
+  {
+    id: "f2",
+    label: "Flight EK517",
+    sub: "DEL→DXB (Re-routed)",
+    icon: Plane,
+    x: 54,
+    y: 30,
+    state: "recovered",
+    time: "14:15",
+    statusDetail: "Confirmed Emirates seat · Emirates Business Lounge access unlocked",
+    autonomousAction: "₹18,500 rebooking fee auto-paid via Credit Card Insurance",
+    downstreamAffected: ["h", "t"],
+  },
+  {
+    id: "h",
+    label: "Hilton Park Lane",
+    sub: "London",
+    icon: Building2,
+    x: 70,
+    y: 55,
+    state: "upcoming",
+    time: "22:10 (Rescheduled)",
+    statusDetail: "Late arrival notification sent to front desk",
+    autonomousAction: "Reservation secured without penalty · Platinum upgrade intact",
+    downstreamAffected: ["t"],
+  },
+  {
+    id: "t",
+    label: "London Chauffeur",
+    sub: "Rescheduled",
+    icon: Car,
+    x: 84,
+    y: 32,
+    state: "upcoming",
+    time: "20:50 (Adjusted)",
+    statusDetail: "Pickup window synchronized with EK 001 revised touchdown",
+    autonomousAction: "Chauffeur dispatched automatically based on ADS-B telemetry",
+    downstreamAffected: ["m"],
+  },
+  {
+    id: "m",
+    label: "Keynote Meeting",
+    sub: "The Shard",
+    icon: Briefcase,
+    x: 94,
+    y: 60,
+    state: "upcoming",
+    time: "09:00 +1",
+    statusDetail: "Keynote buffer maintained with 11h restful buffer",
+    autonomousAction: "Continuity preserved · zero disruption to business schedule",
+    downstreamAffected: [],
+  },
 ];
 
 const edges: [string, string][] = [
@@ -53,17 +157,30 @@ const stateColor: Record<NodeState, { ring: string; bg: string; text: string; do
 };
 
 function DigitalTwin() {
+  const [selectedId, setSelectedId] = useState<string>("f1");
   const nodeById = Object.fromEntries(nodes.map((n) => [n.id, n]));
+  const activeNode = nodeById[selectedId];
 
   return (
     <div className="space-y-6">
-      <div>
-        <div className="text-[11px] uppercase tracking-[0.24em] text-primary">Innovation 01</div>
-        <h1 className="mt-1 text-3xl font-semibold tracking-tight">Journey Digital Twin</h1>
-        <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-          Every booking, transfer, and dependency modelled as a live graph. When one node breaks,
-          the twin instantly propagates the impact and simulates recovery paths.
-        </p>
+      <div className="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <div className="text-[11px] uppercase tracking-[0.24em] text-primary">Innovation 01</div>
+          <h1 className="mt-1 text-3xl font-semibold tracking-tight">Journey Digital Twin</h1>
+          <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
+            Every booking, transfer, and dependency modelled as a live graph. Click any node to
+            inspect real-time telemetry, ripple consequences, and autonomous mitigations.
+          </p>
+        </div>
+        <div className="flex items-center gap-2">
+          <Link
+            to="/recovery"
+            className="inline-flex items-center gap-1.5 rounded-xl bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground shadow-sm transition hover:bg-primary/90"
+          >
+            <ShieldCheck className="h-3.5 w-3.5" />
+            View Recovery Center
+          </Link>
+        </div>
       </div>
 
       <GlassCard className="p-0">
@@ -111,23 +228,27 @@ function DigitalTwin() {
           {/* nodes */}
           {nodes.map((n, i) => {
             const c = stateColor[n.state];
+            const isSelected = selectedId === n.id;
             return (
               <motion.div
                 key={n.id}
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.3 + i * 0.1, type: "spring" }}
-                className="absolute -translate-x-1/2 -translate-y-1/2"
+                className="absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer select-none"
                 style={{ left: `${n.x}%`, top: `${n.y}%` }}
+                onClick={() => setSelectedId(n.id)}
               >
                 <div className="group relative">
-                  {(n.state === "broken" || n.state === "affected") && (
+                  {(n.state === "broken" || n.state === "affected" || isSelected) && (
                     <span
-                      className={`absolute inset-0 -z-10 rounded-2xl ${c.dot} opacity-40 blur-xl`}
+                      className={`absolute inset-0 -z-10 rounded-2xl ${c.dot} ${isSelected ? "opacity-60 blur-md scale-110" : "opacity-40 blur-xl"}`}
                     />
                   )}
                   <div
-                    className={`flex items-center gap-2 rounded-2xl border bg-white/90 px-3 py-2 shadow-card ring-2 ${c.ring} backdrop-blur-md transition hover:scale-105`}
+                    className={`flex items-center gap-2 rounded-2xl border bg-white/95 px-3 py-2 shadow-card backdrop-blur-md transition hover:scale-105 ${
+                      isSelected ? "ring-2 ring-primary shadow-glow border-primary" : `ring-2 ${c.ring}`
+                    }`}
                   >
                     <div className={`grid h-8 w-8 place-items-center rounded-lg ${c.bg} ${c.text}`}>
                       <n.icon className="h-4 w-4" />
@@ -152,6 +273,71 @@ function DigitalTwin() {
           </div>
         </div>
       </GlassCard>
+
+      {/* Node Inspector Panel */}
+      <AnimatePresence mode="wait">
+        {activeNode && (
+          <motion.div
+            key={activeNode.id}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+          >
+            <GlassCard className="border-primary/30 bg-gradient-to-br from-white via-white to-cc-light/30 p-5">
+              <div className="flex flex-wrap items-start justify-between gap-4">
+                <div className="flex items-center gap-3">
+                  <div className={`grid h-10 w-10 place-items-center rounded-xl ${stateColor[activeNode.state].bg} ${stateColor[activeNode.state].text}`}>
+                    <activeNode.icon className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <h3 className="text-base font-semibold">{activeNode.label}</h3>
+                      <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${stateColor[activeNode.state].bg} ${stateColor[activeNode.state].text}`}>
+                        {activeNode.state}
+                      </span>
+                    </div>
+                    <div className="text-xs text-muted-foreground">Location: {activeNode.sub} · Scheduled: {activeNode.time}</div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <Link
+                    to="/recovery"
+                    className="inline-flex items-center gap-1 rounded-xl bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary hover:bg-primary/20"
+                  >
+                    Compare Alternatives
+                    <ArrowRight className="h-3 w-3" />
+                  </Link>
+                </div>
+              </div>
+
+              <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="rounded-xl border border-border/60 bg-white/80 p-3">
+                  <div className="text-[10px] uppercase tracking-widest text-muted-foreground">Status Telemetry</div>
+                  <div className="mt-1 text-xs font-medium">{activeNode.statusDetail}</div>
+                </div>
+
+                <div className="rounded-xl border border-border/60 bg-white/80 p-3">
+                  <div className="text-[10px] uppercase tracking-widest text-primary font-semibold flex items-center gap-1">
+                    <Sparkles className="h-3 w-3" /> Autonomous Action Taken
+                  </div>
+                  <div className="mt-1 text-xs font-medium text-foreground/90">{activeNode.autonomousAction}</div>
+                </div>
+
+                <div className="rounded-xl border border-border/60 bg-white/80 p-3">
+                  <div className="text-[10px] uppercase tracking-widest text-muted-foreground">Downstream Dependencies</div>
+                  <div className="mt-1 text-xs font-medium">
+                    {activeNode.downstreamAffected.length > 0
+                      ? `${activeNode.downstreamAffected.length} connected legs monitored & adjusted`
+                      : "Zero downstream risk detected"}
+                  </div>
+                </div>
+              </div>
+            </GlassCard>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Ripple */}
       <div className="grid gap-6 lg:grid-cols-3">

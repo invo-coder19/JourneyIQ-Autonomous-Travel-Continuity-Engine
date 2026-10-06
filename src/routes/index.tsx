@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 import {
   Plane,
   Hotel,
@@ -12,6 +13,8 @@ import {
   Cloud,
   MapPin,
   ChevronRight,
+  Sparkles,
+  AlertTriangle,
 } from "lucide-react";
 import { GlassCard, SectionTitle, StatusDot } from "@/components/ui-kit";
 
@@ -44,6 +47,31 @@ const itinerary = [
   { city: "Hilton Park Lane", detail: "Check-in", status: "upcoming" as const, time: "22:10" },
   { city: "Conference", detail: "The Shard", status: "upcoming" as const, time: "09:00 +1" },
 ];
+
+function CountdownTimer({ initialSeconds = 8048 }: { initialSeconds?: number }) {
+  const [secondsLeft, setSecondsLeft] = useState(initialSeconds);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setSecondsLeft((s) => (s > 0 ? s - 1 : 0));
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const hours = Math.floor(secondsLeft / 3600);
+  const minutes = Math.floor((secondsLeft % 3600) / 60);
+  const seconds = secondsLeft % 60;
+
+  const pad = (n: number) => String(n).padStart(2, "0");
+
+  return (
+    <div className="mt-1 flex items-baseline gap-2 text-3xl font-semibold tabular-nums">
+      {pad(hours)}<span className="text-sm text-white/60">h</span>
+      {pad(minutes)}<span className="text-sm text-white/60">m</span>
+      {pad(seconds)}<span className="text-sm text-white/60">s</span>
+    </div>
+  );
+}
 
 function Dashboard() {
   return (
@@ -98,11 +126,7 @@ function Dashboard() {
               <div className="text-[10px] uppercase tracking-widest text-white/60">
                 Countdown to departure
               </div>
-              <div className="mt-1 flex items-baseline gap-2 text-3xl font-semibold tabular-nums">
-                02<span className="text-sm text-white/60">h</span>
-                14<span className="text-sm text-white/60">m</span>
-                08<span className="text-sm text-white/60">s</span>
-              </div>
+              <CountdownTimer initialSeconds={8048} />
               <div className="mt-2 flex items-center gap-1.5 text-xs text-white/70">
                 <Plane className="h-3.5 w-3.5" /> AI816 · PNQ → DEL · Gate 4B
               </div>
@@ -110,6 +134,44 @@ function Dashboard() {
           </div>
         </div>
       </motion.section>
+
+      {/* Autonomous Continuity Status Banner */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1 }}
+        className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-amber-200/80 bg-gradient-to-r from-amber-50 via-white to-sky-50/60 p-4 text-xs shadow-card"
+      >
+        <div className="flex items-center gap-3">
+          <div className="grid h-8 w-8 place-items-center rounded-xl bg-amber-500 text-white shadow-sm">
+            <AlertTriangle className="h-4 w-4" />
+          </div>
+          <div>
+            <div className="font-semibold text-amber-950">
+              Active Disruption Remediated: Flight AI816 (+2h 45m weather delay)
+            </div>
+            <div className="text-muted-foreground">
+              Autonomous recovery Option A executed via Dubai (EK517) · Hilton check-in protected · ₹18,500 insurance applied.
+            </div>
+          </div>
+        </div>
+        <div className="flex items-center gap-2">
+          <Link
+            to="/digital-twin"
+            className="inline-flex items-center gap-1 rounded-xl border border-amber-300 bg-white px-3 py-1.5 font-medium text-amber-900 transition hover:bg-amber-100/50"
+          >
+            <Sparkles className="h-3.5 w-3.5 text-primary" />
+            Inspect Twin Graph
+          </Link>
+          <Link
+            to="/recovery"
+            className="inline-flex items-center gap-1 rounded-xl bg-primary px-3 py-1.5 font-medium text-primary-foreground shadow-sm transition hover:bg-primary/90"
+          >
+            Review Plan (Score 97)
+            <ChevronRight className="h-3 w-3" />
+          </Link>
+        </div>
+      </motion.div>
 
       {/* Metrics */}
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
